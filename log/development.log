@@ -4,3 +4,290 @@ DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rail
   [1m[35m (233.8ms)[0m  [1m[35mCREATE DATABASE "architectural_design_tech_test_development" ENCODING = 'unicode'[0m
   [1m[35m (68.4ms)[0m  [1m[35mCREATE DATABASE "architectural_design_tech_test_test" ENCODING = 'unicode'[0m
 DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/brett/Projects/senior-engineer-pricing-test/config/environment.rb:7)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/projects/ButternutBox/senior-engineer-pricing-test/config/environment.rb:7)
+  [1m[35m (230.0ms)[0m  [1m[35mCREATE DATABASE "architectural_design_tech_test_development" ENCODING = 'unicode'[0m
+  [1m[35m (78.1ms)[0m  [1m[35mCREATE DATABASE "architectural_design_tech_test_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_admin_comments" CASCADE[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "active_admin_comments" ("id" bigserial primary key, "namespace" character varying, "body" text, "resource_type" character varying, "resource_id" bigint, "author_type" character varying, "author_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_author" ON "active_admin_comments" ("author_type", "author_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_namespace" ON "active_admin_comments" ("namespace")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_resource" ON "active_admin_comments" ("resource_type", "resource_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "admin_users" CASCADE[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "admin_users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp(6), "remember_created_at" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admin_users_on_email" ON "admin_users" ("email")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admin_users_on_reset_password_token" ON "admin_users" ("reset_password_token")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "order_products" CASCADE[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "order_products" ("id" bigserial primary key, "order_id" bigint NOT NULL, "product_id" bigint NOT NULL, "quantity" integer NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_order_products_on_order_id" ON "order_products" ("order_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_order_products_on_product_id" ON "order_products" ("product_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "orders" CASCADE[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "shipping_date" date NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "products" CASCADE[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "products" ("id" bigserial primary key, "name" character varying NOT NULL, "price_in_cents" integer NOT NULL, "sku_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE INDEX "index_products_on_sku_id" ON "products" ("sku_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "skus" CASCADE[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "skus" ("id" bigserial primary key, "product_code" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.4ms)[0m  [1m[35mALTER TABLE "order_products" ADD CONSTRAINT "fk_rails_f40b8ccee4"
+FOREIGN KEY ("order_id")
+  REFERENCES "orders" ("id")
+[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "order_products" ADD CONSTRAINT "fk_rails_96c0709f78"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "products" ADD CONSTRAINT "fk_rails_2625f5c463"
+FOREIGN KEY ("sku_id")
+  REFERENCES "skus" ("id")
+[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20240304125128)[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20240304125053),
+(20240304125008),
+(20240304124913),
+(20240304100147),
+(20240304100145);[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-07-16 01:16:27.831884', '2024-07-16 01:16:27.831905') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '8f251497fd80171c227ebb787185f3d8619ae452', '2024-07-16 01:16:27.836012', '2024-07-16 01:16:27.836015') RETURNING "key"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_admin_comments" CASCADE[0m
+  [1m[35m (7.2ms)[0m  [1m[35mCREATE TABLE "active_admin_comments" ("id" bigserial primary key, "namespace" character varying, "body" text, "resource_type" character varying, "resource_id" bigint, "author_type" character varying, "author_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_author" ON "active_admin_comments" ("author_type", "author_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_namespace" ON "active_admin_comments" ("namespace")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_resource" ON "active_admin_comments" ("resource_type", "resource_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "admin_users" CASCADE[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "admin_users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp(6), "remember_created_at" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admin_users_on_email" ON "admin_users" ("email")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admin_users_on_reset_password_token" ON "admin_users" ("reset_password_token")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "order_products" CASCADE[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE TABLE "order_products" ("id" bigserial primary key, "order_id" bigint NOT NULL, "product_id" bigint NOT NULL, "quantity" integer NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_order_products_on_order_id" ON "order_products" ("order_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_order_products_on_product_id" ON "order_products" ("product_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "orders" CASCADE[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "shipping_date" date NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "products" CASCADE[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "products" ("id" bigserial primary key, "name" character varying NOT NULL, "price_in_cents" integer NOT NULL, "sku_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_products_on_sku_id" ON "products" ("sku_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "skus" CASCADE[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "skus" ("id" bigserial primary key, "product_code" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.3ms)[0m  [1m[35mALTER TABLE "order_products" ADD CONSTRAINT "fk_rails_f40b8ccee4"
+FOREIGN KEY ("order_id")
+  REFERENCES "orders" ("id")
+[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "order_products" ADD CONSTRAINT "fk_rails_96c0709f78"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "products" ADD CONSTRAINT "fk_rails_2625f5c463"
+FOREIGN KEY ("sku_id")
+  REFERENCES "skus" ("id")
+[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20240304125128)[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20240304125053),
+(20240304125008),
+(20240304124913),
+(20240304100147),
+(20240304100145);[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-07-16 01:16:27.965098', '2024-07-16 01:16:27.965102') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Update (0.3ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2024-07-16 01:16:27.967828' WHERE "ar_internal_metadata"."key" = 'environment'[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '8f251497fd80171c227ebb787185f3d8619ae452', '2024-07-16 01:16:27.969847', '2024-07-16 01:16:27.969850') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAdminUser Exists? (23.0ms)[0m  [1m[34mSELECT 1 AS one FROM "admin_users" WHERE "admin_users"."email" = $1 LIMIT $2[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+  [1m[36mAdminUser Create (0.7ms)[0m  [1m[32mINSERT INTO "admin_users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "admin@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-07-16 01:16:28.338915"], ["updated_at", "2024-07-16 01:16:28.338915"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSku Create (1.5ms)[0m  [1m[32mINSERT INTO "skus" ("product_code", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["product_code", "SKU-001"], ["created_at", "2024-07-16 01:16:28.357356"], ["updated_at", "2024-07-16 01:16:28.357356"]]
+  [1m[36mTRANSACTION (40.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (1.9ms)[0m  [1m[32mINSERT INTO "products" ("name", "price_in_cents", "sku_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Product 1"], ["price_in_cents", 1000], ["sku_id", 1], ["created_at", "2024-07-16 01:16:28.426503"], ["updated_at", "2024-07-16 01:16:28.426503"]]
+  [1m[36mTRANSACTION (40.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Create (1.8ms)[0m  [1m[32mINSERT INTO "orders" ("shipping_date", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["shipping_date", "2024-07-16"], ["created_at", "2024-07-16 01:16:28.483767"], ["updated_at", "2024-07-16 01:16:28.483767"]]
+  [1m[36mTRANSACTION (40.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrderProduct Create (1.9ms)[0m  [1m[32mINSERT INTO "order_products" ("order_id", "product_id", "quantity", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["order_id", 1], ["product_id", 1], ["quantity", 2], ["created_at", "2024-07-16 01:16:28.547854"], ["updated_at", "2024-07-16 01:16:28.547854"]]
+  [1m[36mTRANSACTION (16.4ms)[0m  [1m[35mCOMMIT[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/projects/ButternutBox/senior-engineer-pricing-test/config/environment.rb:7)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/projects/ButternutBox/senior-engineer-pricing-test/config/environment.rb:7)
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/projects/ButternutBox/senior-engineer-pricing-test/config/environment.rb:7)
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7871856301609538700)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+Migrating to CreateProductVersions (20240716011743)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (42.5ms)[0m  [1m[35mCREATE TABLE "product_versions" ("id" bigserial primary key, "product_id" bigint NOT NULL, "price_in_cents" integer NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_496b84c2bc"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE INDEX "index_product_versions_on_product_id" ON "product_versions" ("product_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "products" ADD "current_version_id" bigint[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_products_on_current_version_id" ON "products" ("current_version_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "products" ADD CONSTRAINT "fk_rails_23017b3517"
+FOREIGN KEY ("current_version_id")
+  REFERENCES "product_versions" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "order_products" ADD "product_version_id" bigint[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_order_products_on_product_version_id" ON "order_products" ("product_version_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "order_products" ADD CONSTRAINT "fk_rails_d83f3343b8"
+FOREIGN KEY ("product_version_id")
+  REFERENCES "product_versions" ("id")
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "order_products" DROP COLUMN "product_id"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240716011743') RETURNING "version"[0m
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to PopulateProductVersions (20240716011822)
+  [1m[36mTRANSACTION (40.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProductVersion Create (1.0ms)[0m  [1m[32mINSERT INTO "product_versions" ("product_id", "price_in_cents", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["product_id", 1], ["price_in_cents", 1000], ["created_at", "2024-07-16 01:21:47.612598"], ["updated_at", "2024-07-16 01:21:47.612598"]]
+  [1m[36mProduct Update (0.4ms)[0m  [1m[33mUPDATE "products" SET "current_version_id" = $1 WHERE "products"."id" = $2[0m  [["current_version_id", 1], ["id", 1]]
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240716011822') RETURNING "version"[0m
+  [1m[36mTRANSACTION (39.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7871856301609538700)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/projects/ButternutBox/senior-engineer-pricing-test/config/environment.rb:7)
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (38.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "architectural_design_tech_test_development"[0m
+  [1m[35m (38.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "architectural_design_tech_test_test"[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/projects/ButternutBox/senior-engineer-pricing-test/config/environment.rb:7)
+  [1m[35m (117.8ms)[0m  [1m[35mCREATE DATABASE "architectural_design_tech_test_development" ENCODING = 'unicode'[0m
+  [1m[35m (68.2ms)[0m  [1m[35mCREATE DATABASE "architectural_design_tech_test_test" ENCODING = 'unicode'[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/projects/ButternutBox/senior-engineer-pricing-test/config/environment.rb:7)
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7871856301609538700)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-07-16 01:22:37.960678', '2024-07-16 01:22:37.960683') RETURNING "key"[0m
+Migrating to DeviseCreateAdminUsers (20240304100145)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (46.3ms)[0m  [1m[35mCREATE TABLE "admin_users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp(6), "remember_created_at" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admin_users_on_email" ON "admin_users" ("email")[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admin_users_on_reset_password_token" ON "admin_users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240304100145') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateActiveAdminComments (20240304100147)
+  [1m[36mTRANSACTION (39.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (48.5ms)[0m  [1m[35mCREATE TABLE "active_admin_comments" ("id" bigserial primary key, "namespace" character varying, "body" text, "resource_type" character varying, "resource_id" bigint, "author_type" character varying, "author_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_resource" ON "active_admin_comments" ("resource_type", "resource_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_author" ON "active_admin_comments" ("author_type", "author_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_active_admin_comments_on_namespace" ON "active_admin_comments" ("namespace")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240304100147') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrders (20240304124913)
+  [1m[36mTRANSACTION (39.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (44.2ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "shipping_date" date NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240304124913') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSkus (20240304125008)
+  [1m[36mTRANSACTION (40.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (47.2ms)[0m  [1m[35mCREATE TABLE "skus" ("id" bigserial primary key, "product_code" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240304125008') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProducts (20240304125053)
+  [1m[36mTRANSACTION (40.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (47.6ms)[0m  [1m[35mCREATE TABLE "products" ("id" bigserial primary key, "name" character varying NOT NULL, "price_in_cents" integer NOT NULL, "sku_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_2625f5c463"
+FOREIGN KEY ("sku_id")
+  REFERENCES "skus" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_products_on_sku_id" ON "products" ("sku_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240304125053') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrderProducts (20240304125128)
+  [1m[36mTRANSACTION (40.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (47.5ms)[0m  [1m[35mCREATE TABLE "order_products" ("id" bigserial primary key, "order_id" bigint NOT NULL, "product_id" bigint NOT NULL, "quantity" integer NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_f40b8ccee4"
+FOREIGN KEY ("order_id")
+  REFERENCES "orders" ("id")
+, CONSTRAINT "fk_rails_96c0709f78"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_order_products_on_order_id" ON "order_products" ("order_id")[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE INDEX "index_order_products_on_product_id" ON "order_products" ("product_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240304125128') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProductVersions (20240716011743)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "product_versions" ("id" bigserial primary key, "product_id" bigint NOT NULL, "price_in_cents" integer NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_496b84c2bc"
+FOREIGN KEY ("product_id")
+  REFERENCES "products" ("id")
+)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_product_versions_on_product_id" ON "product_versions" ("product_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "products" ADD "current_version_id" bigint[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_products_on_current_version_id" ON "products" ("current_version_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "products" ADD CONSTRAINT "fk_rails_23017b3517"
+FOREIGN KEY ("current_version_id")
+  REFERENCES "product_versions" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "order_products" ADD "product_version_id" bigint[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_order_products_on_product_version_id" ON "order_products" ("product_version_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "order_products" ADD CONSTRAINT "fk_rails_d83f3343b8"
+FOREIGN KEY ("product_version_id")
+  REFERENCES "product_versions" ("id")
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "order_products" DROP COLUMN "product_id"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240716011743') RETURNING "version"[0m
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to PopulateProductVersions (20240716011822)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240716011822') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(7871856301609538700)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/projects/ButternutBox/senior-engineer-pricing-test/config/environment.rb:7)
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAdminUser Exists? (2.3ms)[0m  [1m[34mSELECT 1 AS one FROM "admin_users" WHERE "admin_users"."email" = $1 LIMIT $2[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+  [1m[36mAdminUser Create (0.9ms)[0m  [1m[32mINSERT INTO "admin_users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "admin@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-07-16 01:22:43.763396"], ["updated_at", "2024-07-16 01:22:43.763396"]]
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSku Create (1.5ms)[0m  [1m[32mINSERT INTO "skus" ("product_code", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["product_code", "SKU-001"], ["created_at", "2024-07-16 01:22:43.780013"], ["updated_at", "2024-07-16 01:22:43.780013"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (2.1ms)[0m  [1m[32mINSERT INTO "products" ("name", "price_in_cents", "sku_id", "created_at", "updated_at", "current_version_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "Product 1"], ["price_in_cents", 1000], ["sku_id", 1], ["created_at", "2024-07-16 01:22:43.806140"], ["updated_at", "2024-07-16 01:22:43.806140"], ["current_version_id", nil]]
+  [1m[36mProductVersion Create (0.9ms)[0m  [1m[32mINSERT INTO "product_versions" ("product_id", "price_in_cents", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["product_id", 1], ["price_in_cents", 1000], ["created_at", "2024-07-16 01:22:43.829457"], ["updated_at", "2024-07-16 01:22:43.829457"]]
+  ↳ app/models/product.rb:17:in `create_version'
+  [1m[36mProduct Update (0.5ms)[0m  [1m[33mUPDATE "products" SET "current_version_id" = $1 WHERE "products"."id" = $2[0m  [["current_version_id", 1], ["id", 1]]
+  ↳ app/models/product.rb:20:in `create_version'
+  [1m[36mTRANSACTION (40.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/product.rb:17:in `create_version'
+  [1m[36mProductVersion Create (1.8ms)[0m  [1m[32mINSERT INTO "product_versions" ("product_id", "price_in_cents", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["product_id", 1], ["price_in_cents", 1000], ["created_at", "2024-07-16 01:22:43.876393"], ["updated_at", "2024-07-16 01:22:43.876393"]]
+  ↳ app/models/product.rb:17:in `create_version'
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/product.rb:17:in `create_version'
+  [1m[36mProduct Update (0.6ms)[0m  [1m[33mUPDATE "products" SET "current_version_id" = $1 WHERE "products"."id" = $2[0m  [["current_version_id", 2], ["id", 1]]
+  ↳ app/models/product.rb:20:in `create_version'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Create (1.8ms)[0m  [1m[32mINSERT INTO "orders" ("shipping_date", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["shipping_date", "2024-07-16"], ["created_at", "2024-07-16 01:22:43.896846"], ["updated_at", "2024-07-16 01:22:43.896846"]]
+  [1m[36mTRANSACTION (39.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProductVersion Load (0.3ms)[0m  [1m[34mSELECT "product_versions".* FROM "product_versions" WHERE "product_versions"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrderProduct Create (2.1ms)[0m  [1m[32mINSERT INTO "order_products" ("order_id", "quantity", "created_at", "updated_at", "product_version_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["order_id", 1], ["quantity", 2], ["created_at", "2024-07-16 01:22:43.963667"], ["updated_at", "2024-07-16 01:22:43.963667"], ["product_version_id", 2]]
+  [1m[36mTRANSACTION (40.6ms)[0m  [1m[35mCOMMIT[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /Users/apple/projects/ButternutBox/senior-engineer-pricing-test/config/environment.rb:7)
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7871856301609538700)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7871856301609538700)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m

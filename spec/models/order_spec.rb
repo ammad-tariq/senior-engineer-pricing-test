@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe Order do
@@ -20,8 +18,9 @@ RSpec.describe Order do
   end
 
   describe 'total' do
-    let(:order) { build(:order, order_products:) }
-    let(:order_products) { build_list(:order_product, 2, quantity: 2, product: build(:product, price_in_cents: 100)) }
+    let(:product_version) { build(:product_version, price_in_cents: 100) }
+    let(:order_products) { build_list(:order_product, 2, quantity: 2, product_version: product_version) }
+    let(:order) { build(:order, order_products: order_products) }
 
     it 'returns the total' do
       expect(order.total).to eq(400)

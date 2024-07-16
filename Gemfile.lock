@@ -143,6 +143,7 @@ GEM
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
     ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86_64-darwin)
     formtastic (5.0.0)
       actionpack (>= 6.0.0)
     formtastic_i18n (0.7.0)
@@ -214,6 +215,8 @@ GEM
       net-protocol
     nio4r (2.7.3)
     nokogiri (1.16.5-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.5-x86_64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.24.0)
@@ -410,6 +413,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-23
+  x86_64-darwin-20
 
 DEPENDENCIES
   activeadmin
@@ -446,7 +450,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.2.0p0
+   ruby 3.1.0p0
 
 BUNDLED WITH
    2.4.6
